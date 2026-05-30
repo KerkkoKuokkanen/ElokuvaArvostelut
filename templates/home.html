@@ -1,0 +1,35 @@
+<h1>elokuva arvostelut</h1>
+
+{% if username %}
+    <p>Welcome, <strong>{{ username }}</strong>! | <a href="/profile">Go to My Dashboard</a> | <a href="/logout">Log Out</a></p>
+{% else %}
+    <p>You are not logged in. Log in to write a review.</p>
+    <a href="/login">Login</a> | <a href="/register">Register</a>
+{% endif %}
+
+<hr>
+
+<h3>Search Reviews</h3>
+<form action="/" method="GET">
+    <input type="text" name="search" placeholder="Enter movie title..." value="{{ search_keyword if search_keyword else '' }}" required>
+    <button type="submit">Search</button>
+    {% if search_keyword %}
+        <a href="/">Clear Search</a>
+    {% endif %}
+</form>
+
+<hr>
+
+<h3>{% if search_keyword %}Search Results for "{{ search_keyword }}"{% else %}Recent Reviews{% endif %}</h3>
+
+{% if reviews %}
+    {% for review in reviews %}
+        <div style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+            <strong>{{ review[1] }}</strong> - {{ review[2] }}/5 stars <br>
+            <p style="margin: 5px 0; font-style: italic;">"{{ review[3] }}"</p>
+            <small>Reviewed by: {{ review[0] }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No reviews found.</p>
+{% endif %}

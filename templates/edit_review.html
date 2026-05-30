@@ -1,0 +1,21 @@
+<h1>elokuva arvostelut</h1>
+<h2>Edit Review</h2>
+<p><a href="/profile">Back to Dashboard</a></p>
+
+<hr>
+
+{% if error %}<p style="color: red;">{{ error }}</p>{% endif %}
+
+<!-- The review variable contains: (id, movie_title, rating, summary) -->
+<form action="/profile/edit_review/{{ review[0] }}" method="POST">
+    <p><strong>Movie Title:</strong> {{ review[1] }}</p>
+    <small style="color: gray;">(Title cannot be modified)</small><br><br>
+    
+    <label>Rating (0-5):</label><br>
+    <input type="number" name="rating" min="0" max="5" value="{{ review[2] }}" required><br><br>
+    
+    <label>Summary (Max 400 characters):</label><br>
+    <textarea name="summary" rows="4" cols="40" maxlength="400" required>{{ review[3] }}</textarea><br><br>
+    
+    <button type="submit">Save Changes</button>
+</form>

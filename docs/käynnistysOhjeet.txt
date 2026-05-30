@@ -1,0 +1,11 @@
+
+(mac / linux)
+Luo virtuaali ympäristö:
+python3 -m venv venv
+source venv/bin/activate
+
+Lataa flask:
+pip install Flask
+
+Käynnistä sovellus:
+python app.py

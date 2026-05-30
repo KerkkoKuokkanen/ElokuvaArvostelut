@@ -1,0 +1,44 @@
+<h1>elokuva arvostelut</h1>
+<h2>My Profile: {{ username }}</h2>
+<p><a href="/">Back to Homepage</a> | <a href="/logout">Log Out</a></p>
+
+<hr>
+
+<h3>Add a New Review</h3>
+{% if error %}<p style="color: red;">{{ error }}</p>{% endif %}
+
+<form action="/profile/add_review" method="POST">
+    <label>Movie Title (Max 80 characters):</label><br>
+    <input type="text" name="movie_title" maxlength="80" required><br><br>
+    
+    <label>Rating (0-5):</label><br>
+    <input type="number" name="rating" min="0" max="5" required><br><br>
+    
+    <label>Summary (Max 400 characters):</label><br>
+    <textarea name="summary" rows="4" cols="40" maxlength="400" required></textarea><br><br>
+    
+    <button type="submit">Submit Review</button>
+</form>
+
+<hr>
+
+<h3>My Reviews</h3>
+{% if reviews %}
+    {% for review in reviews %}
+        <div style="border-bottom: 1px solid #ccc; padding: 15px 0;">
+            <strong>{{ review[1] }}</strong> - {{ review[2] }}/5 stars <br>
+            
+            <p style="margin: 5px 0; font-style: italic;">"{{ review[3] }}"</p>
+            
+            <a href="/profile/edit_review/{{ review[0] }}" style="margin-right: 15px;">Edit Review</a>
+
+            <form action="/profile/delete_review/{{ review[0] }}" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this review?');" style="color: red;">
+                    Delete Review
+                </button>
+            </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>You haven't written any reviews yet.</p>
+{% endif %}
