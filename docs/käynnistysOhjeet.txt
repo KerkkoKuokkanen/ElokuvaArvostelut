@@ -6,6 +6,7 @@ source venv/bin/activate
 
 Lataa flask:
 pip install Flask
+pip install Flask-WTF
 
 Käynnistä sovellus:
 python app.py

@@ -17,3 +17,11 @@
 - Käyttäjä näkee kaikki sivulle lisätyt arvostelut
 - Käyttäjä pystyy myös hakemaan sivulta arvosteluja hakukoneella
 - Kirjautuminen, rekisteröinti ja uloskirjautuminen myös lisätty
+
+# välipalautus 3
+
+- Käyttäjät pystyvät tykkäämään tai "ei tykkäämään" lisätyistä arvosteluista
+- Käyttäjät pystyvät katsomaan toiseten käyttäjien sivuja joissa lukee kaikki heidän arvostelut ja niiden yhteenlaskettu määrä
+- Käyttäjä sivuilla pystyy myös tykkäämään ja "ei tykkäämään" toisten arvosteluista
+- CSRF aukko on estetty pitkällä etukäteen valitulla tokenilla
+- Näkyvät tilastot ovat etusivulla arvostelujen tykkäykset ja käyttäjäsivuilla arvostelujen määrä ja näkyvät tykkäykset

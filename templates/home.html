@@ -3,7 +3,7 @@
 {% if username %}
     <p>Welcome, <strong>{{ username }}</strong>! | <a href="/profile">Go to My Dashboard</a> | <a href="/logout">Log Out</a></p>
 {% else %}
-    <p>You are not logged in. Log in to write a review.</p>
+    <p>You are not logged in. Log in to write or react to reviews.</p>
     <a href="/login">Login</a> | <a href="/register">Register</a>
 {% endif %}
 
@@ -24,10 +24,27 @@
 
 {% if reviews %}
     {% for review in reviews %}
-        <div style="border-bottom: 1px solid #ccc; padding: 10px 0;">
-            <strong>{{ review[1] }}</strong> - {{ review[2] }}/5 stars <br>
-            <p style="margin: 5px 0; font-style: italic;">"{{ review[3] }}"</p>
-            <small>Reviewed by: {{ review[0] }}</small>
+        <div style="border-bottom: 1px solid #ccc; padding: 15px 0;">
+            <strong>{{ review[2] }}</strong> - {{ review[3] }}/5 stars <br>
+            <p style="margin: 5px 0; font-style: italic;">"{{ review[4] }}"</p>
+            <small>Reviewed by: <a href="/profile/{{ review[1] }}">{{ review[1] }}</a></small>
+            
+            <br><br>
+            <span>👍 {{ review[5] }} Likes</span> | <span>👎 {{ review[6] }} Dislikes</span>
+            
+            {% if username %}
+                <div style="margin-top: 5px;">
+                    <form action="/react/{{ review[0] }}/like" method="POST" style="display: inline;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit">Like</button>
+                    </form>
+                    
+                    <form action="/react/{{ review[0] }}/dislike" method="POST" style="display: inline;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit">Dislike</button>
+                    </form>
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
 {% else %}
